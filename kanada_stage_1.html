@@ -371,7 +371,30 @@ footer {
     <div id="footer-container"></div>
 
     <script>
- 
+ // URLs to raw GitHub content
+    const files = {
+      header: "https://raw.githubusercontent.com/nithinvs0404/TypingTutor/main/Header.html",
+      footer: "https://raw.githubusercontent.com/nithinvs0404/TypingTutor/main/Footer.html"
+    };
+
+    // Function to load HTML from GitHub and insert into page
+    function loadFragment(url, containerId) {
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error(`Failed to load: ${url}`);
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById(containerId).innerHTML = html;
+        })
+        .catch(error => {
+          console.error("Error loading fragment:", error);
+        });
+    }
+
+    // Load header and footer
+    loadFragment(files.header, "header-container");
+    loadFragment(files.footer, "footer-container");
         // Function to Load External HTML Files
         function loadComponent(elementId, filePath) {
             fetch(filePath)
