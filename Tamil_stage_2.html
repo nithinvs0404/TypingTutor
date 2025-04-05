@@ -279,6 +279,112 @@ footer {
     position: relative; /* Ensures it moves naturally */
     left: -18px; /* Moves footer 20px to the left */
 }
+          .faq-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.faq-button {
+  top: 80px; /* Increased from 20px to 60px */
+}
+
+
+.faq-button svg {
+  height: 1.5em;
+  fill: white;
+}
+
+.faq-button:hover svg {
+  animation: jello-vertical 0.7s both;
+}
+
+@keyframes jello-vertical {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(0.75, 1.25, 1); }
+  40% { transform: scale3d(1.25, 0.75, 1); }
+  50% { transform: scale3d(0.85, 1.15, 1); }
+  65% { transform: scale3d(1.05, 0.95, 1); }
+  75% { transform: scale3d(0.95, 1.05, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+.tooltip {
+  position: absolute;
+  top: -25px;
+  opacity: 0;
+  background-color: #ff2525;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.faq-button:hover .tooltip {
+  opacity: 1;
+}
+
+/* Help Image Modal */
+#helpImage {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25vw; /* 1/4th of the screen width */
+  max-width: 300px; /* Limits size on larger screens */
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1100;
+}
+
+/* Ensure image fits inside modal */
+#helpImage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Overlay Background */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}   
 @media (max-width: 768px) {
     /* Adjust body layout for smaller screens */
     body {
@@ -463,7 +569,8 @@ footer {
 <!-- Help Image Modal -->
 <div id="helpImage" onclick="event.stopPropagation()">
     <button class="close-btn" onclick="hideHelp()">X</button>
-    <img src="http://ka-naada.in/wp-content/uploads/2025/04/sticker1.jpg" alt="logo" style="width: 100%;">
+  <img src="https://raw.githubusercontent.com/nithinvs0404/TypingTutor/main/tb2.png" alt="Typing Tutor Image" />
+
 </div>
 
     <!-- Load Header Here -->
@@ -494,20 +601,19 @@ document.addEventListener("paste", (event) => {
     alert("Pasting content is disabled.");
 });
 
-        // Function to Load External HTML Files
-  function loadComponent(elementId, filePath) {
-            fetch(filePath)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading component:', error));
-        }
+ // Load Header
+  fetch('Header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-container').innerHTML = data;
+    });
 
-        // Load header.html and footer.html
-        loadComponent("header-container", "header.html");
-        loadComponent("footer-container", "footer.html");
-
+  // Load Footer
+  fetch('Footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
         // Footer Scroll Effect
         let lastScrollY = window.scrollY;
         
