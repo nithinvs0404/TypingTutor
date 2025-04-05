@@ -371,6 +371,15 @@ footer {
     <div id="footer-container"></div>
 
     <script>
+             document.addEventListener("copy", (event) => {
+    event.preventDefault();
+    alert("Copying content is disabled.");
+});
+
+document.addEventListener("paste", (event) => {
+    event.preventDefault();
+    alert("Pasting content is disabled.");
+});
  // Load Header
   fetch('Header.html')
     .then(response => response.text())
@@ -515,7 +524,7 @@ function generateKeyboard(keys) {
 
         const label = document.createElement("span");
         label.classList.add("label");
-        label.textContent = `${letter}ಒತ್ತಿ`;
+        label.textContent = `${letter}  ಒತ್ತಿ`;
 
         keyContainer.appendChild(label);
         stageDiv.appendChild(keyContainer);
