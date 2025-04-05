@@ -330,6 +330,15 @@ footer {
 <!-- Footer Container -->
 <div id="footer-container"></div> 
     <script>
+             document.addEventListener("copy", (event) => {
+    event.preventDefault();
+    alert("Copying content is disabled.");
+});
+
+document.addEventListener("paste", (event) => {
+    event.preventDefault();
+    alert("Pasting content is disabled.");
+});
 // Load Header
   fetch('Header.html')
     .then(response => response.text())
