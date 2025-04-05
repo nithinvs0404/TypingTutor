@@ -444,19 +444,7 @@ footer {
     .then(data => {
       document.getElementById('footer-container').innerHTML = data;
     });
-        // Function to Load External HTML Files
-     function loadComponent(elementId, filePath) {
-            fetch(filePath)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading component:', error));
-        }
-
-        // Load header.html and footer.html
-        loadComponent("header-container", "header.html");
-        loadComponent("footer-container", "footer.html");
+  
 
         // Footer Scroll Effect
         let lastScrollY = window.scrollY;
