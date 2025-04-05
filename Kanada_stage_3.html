@@ -399,11 +399,16 @@ footer {
     </div>
     <div id="footer-container"></div>    
 
-
-
-
-
 <script>
+         document.addEventListener("copy", (event) => {
+    event.preventDefault();
+    alert("Copying content is disabled.");
+});
+
+document.addEventListener("paste", (event) => {
+    event.preventDefault();
+    alert("Pasting content is disabled.");
+});
   fetch('Header.html')
     .then(response => response.text())
     .then(data => {
