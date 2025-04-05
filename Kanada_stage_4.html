@@ -431,6 +431,15 @@ footer {
      <div id="footer-container"></div> 
 
     <script>
+             document.addEventListener("copy", (event) => {
+    event.preventDefault();
+    alert("Copying content is disabled.");
+});
+
+document.addEventListener("paste", (event) => {
+    event.preventDefault();
+    alert("Pasting content is disabled.");
+});
  // Load Header
   fetch('Header.html')
     .then(response => response.text())
@@ -555,7 +564,7 @@ function createKeyElement(stage, text) {
 
     const label = document.createElement("span");
     label.classList.add("label");
-    label.textContent = `ಒತ್ತಿ: ${text}`;
+    label.textContent = `${text} ಒತ್ತಿ:`;
 
     keyContainer.appendChild(keyDiv);
     keyContainer.appendChild(label);
@@ -584,7 +593,7 @@ document.getElementById("popupOk").addEventListener("click", () => {
 
 // Handle continue button click
 document.getElementById("continueButton").addEventListener("click", () => {
-    window.location.href = "Kanada stage 5.html";
+    window.location.href = "Kanada_stage_5.html";
 });
 
 generateKannadaKeys();
