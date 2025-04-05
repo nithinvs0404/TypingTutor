@@ -371,16 +371,7 @@ footer {
     <div id="footer-container"></div>
 
     <script>
-        document.addEventListener("copy", (event) => {
-    event.preventDefault();
-    alert("Copying content is disabled.");
-});
-
-document.addEventListener("paste", (event) => {
-    event.preventDefault();
-    alert("Pasting content is disabled.");
-});
-
+ 
         // Function to Load External HTML Files
         function loadComponent(elementId, filePath) {
             fetch(filePath)
