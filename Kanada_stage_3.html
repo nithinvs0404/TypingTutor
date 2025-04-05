@@ -566,7 +566,7 @@ function generateKeyboard(id, letters, columns, isVatakshara = false) {
 
         const label = document.createElement("span");
         label.classList.add("label");
-        label.textContent = isVatakshara ? `ಒತ್ತಿ ${letters[randomLetter].split('=')[0].trim()}` : `ಒತ್ತಿ  ${letters[randomLetter]}`;
+        label.textContent = isVatakshara ? `${letters[randomLetter].split('=')[0].trim()}` : `ಒತ್ತಿ  ${letters[randomLetter]} ಒತ್ತಿ`;
 
         keyContainer.appendChild(keyDiv);
         keyContainer.appendChild(label);
@@ -649,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.getElementById("popupCloseButton").addEventListener("click", function () {
-        window.location.href = "Kanada stage 4.html"; // Redirect after clicking OK
+        window.location.href = "Kanada_stage_4.html"; // Redirect after clicking OK
     });
 
     // Add reset functionality for the reset button
