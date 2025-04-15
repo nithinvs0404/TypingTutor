@@ -7,7 +7,7 @@
     <style>
 body, html {
     margin: 0;
-    padding: 0;
+    padding: 40px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ body, html {
 
 .stats-container {
     position: absolute;
-    top: 80px;
+    top: 40px;
     right: 100px;
     font-size: 18px;
     background: rgba(0, 0, 0, 0.6);
@@ -31,10 +31,28 @@ body, html {
 }
 
 .controls {
-    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
+}
+
+.refresh-button {
+    padding: 8px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7b2cbf;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-button i {
+    margin-right: 5px;
 }
 
 select {
@@ -67,37 +85,44 @@ button:hover {
     background-color: #9d4edd;
 }
 
+/* Update the input container styles */
 .input-container {
     position: relative;
-    width: 100vw;
-    max-width: 3000px;
-    height: 50vh;
+    width: 80%; /* Increased from 80% */
+    max-width: none; /* Remove max-width restriction */
+    height: 60vh; /* Increased from 50vh */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Changed from center */
+    justify-content: flex-start;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .background-text {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
-    font-size: 22px;
-    padding: 20px;
+    font-size: 35px;
+    padding: 20px 40px;
     color: rgba(255, 255, 255, 0.3);
     white-space: pre-wrap;
     word-wrap: break-word;
     text-align: left;
     font-family: inherit;
-    line-height: 1.5;
+    line-height: 1.8;
     z-index: 1;
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .input-box {
     position: absolute;
     width: 100%;
     height: 100%;
-    font-size: 22px;
-    padding: 20px;
+    font-size: 24px;
+    padding: 20px 40px;
     border: none;
     background: transparent;
     color: transparent;
@@ -105,9 +130,7 @@ button:hover {
     resize: none;
     z-index: 2;
     caret-color: white;
-    text-align: left;
-    font-family: inherit;
-    line-height: 1.5;
+    cursor: text !important; /* Force text cursor */
 }
 
 .correct {
@@ -178,15 +201,18 @@ footer {
     background-color: rgba(128, 128, 128, 0.5);
     color: black;
     text-align: center;
-    padding: 15px;
-    position: fixed;
+    padding: 10px 0;
+    position: relative;
     bottom: 0;
-    left: -20px;
+    /* left: -20px; */
     width: 100%;
-    opacity: 0;
+    opacity: 1;
     backdrop-filter: blur(8px);
     font-size: 16px;
     transition: opacity 0.5s ease-in-out;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 @media (max-width: 768px) {
     .stats-container {
@@ -198,7 +224,7 @@ footer {
 
     .controls {
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
     }
 
     select {
@@ -214,12 +240,12 @@ footer {
     }
 
     .input-container {
-        height: 40vh;
+        height: 50vh;
         width: 95%;
     }
 
     .background-text, .input-box {
-        font-size: 16px;
+        font-size: 20px;
         padding: 15px;
     }
 
@@ -349,7 +375,7 @@ footer {
     background-color: rgba(128, 128, 128, 0.5);
     color: black;
     text-align: center;
-    padding: 15px;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -357,20 +383,31 @@ footer {
     backdrop-filter: blur(8px);
     font-size: 16px;
     transition: opacity 0.5s ease-in-out;
+   
+}
+body, html {
+    height:100%;
+    /* margin:0;
+    padding:0; */
+    display: flex;
+
+
 }
 
     </style>
+    <!-- Add FontAwesome for the refresh icon in the head section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     
 
-     <!-- Help Button -->
+     <!-- Help Button
 <button class="faq-button" onclick="showHelp()">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"></path>
     </svg>
     <span class="tooltip">Need help</span>
-</button>
+</button> -->
 
 <!-- Overlay -->
 <div id="overlay" onclick="hideHelp()"></div>
@@ -388,12 +425,14 @@ footer {
     
     <div class="controls">
         <select id="timer-select">
-            <option value="120">2 min</option>
+            <option value="30">30 sec</option>
             <option value="60">1 min</option>
-            <option value="40">40 sec</option>
+            <option value="120">2 min</option>
         </select>
-        
         <button id="start-button">Start</button>
+        <button id="refresh-button" class="refresh-button">
+            <i class="fas fa-sync-alt"></i> Restart
+        </button>
     </div>
 
     <div class="input-container">
@@ -403,6 +442,16 @@ footer {
 
     <!-- Footer Container -->
     <div id="footer-container"></div>
+    <body>
+        <div class="container">
+          <!-- Your main content -->
+        </div>
+      
+        <footer>
+          © 2025 Ka-Nada. All rights reserved.
+        </footer>
+      </body>
+      
     <script>
         
        // Load Header
@@ -504,50 +553,35 @@ function getRandomParagraph() {
     return paragraphs[Math.floor(Math.random() * paragraphs.length)];
 }
 
+// Update only this function
 function updateBackgroundText() {
     let userText = inputBox.value;
     let formattedText = "";
-    let cleanedUserText = userText.replace(/\s+/g, ''); // Remove spaces for comparison
-    let cleanedParagraph = selectedParagraph.replace(/\s+/g, '');
+    correctTyped = 0;
+    totalTyped = 0;
 
-    // ⏳ Start the timer ONLY when the user types the first character
-    if (!startTime && cleanedUserText.length > 0) {
-        startTime = new Date().getTime();
-        if (!isRunning) {
-            isRunning = true;
-            startTimer();  // 🔥 Start the timer when the first character is typed
-        }
-    }
-
-    let inputIndex = 0;
+    // Compare character by character including spaces
     for (let i = 0; i < selectedParagraph.length; i++) {
-        if (selectedParagraph[i] === " ") {
-            formattedText += " ";
-        } else {
-            if (inputIndex < cleanedUserText.length) {
-                totalTyped++;
-                if (cleanedUserText[inputIndex] === cleanedParagraph[inputIndex]) {
-                    formattedText += `<span class="correct">${selectedParagraph[i]}</span>`;
-                    correctTyped++;
-                } else {
-                    formattedText += `<span class="incorrect">${selectedParagraph[i]}</span>`;
-                }
-                inputIndex++;
+        if (i < userText.length) {
+            if (userText[i] === selectedParagraph[i]) {
+                formattedText += `<span class="correct">${selectedParagraph[i]}</span>`;
+                correctTyped++;
             } else {
-                formattedText += selectedParagraph[i];
+                formattedText += `<span class="incorrect">${selectedParagraph[i]}</span>`;
             }
+            totalTyped++;
+        } else {
+            formattedText += selectedParagraph[i];
         }
     }
 
     backgroundText.innerHTML = formattedText;
-    inputBox.setSelectionRange(userText.length, userText.length);
 
-    // ✅ If user finishes typing before time runs out, stop the timer and show results
-    if (cleanedUserText === cleanedParagraph) {
-        clearInterval(timer);
-        const currentTime = new Date().getTime();
-        const timeTaken = startTime ? Math.floor((currentTime - startTime) / 1000) : 0;
-        endTest(true, timeTaken);
+    // Check if typing is complete and show score immediately
+    if (userText.length === selectedParagraph.length && userText === selectedParagraph) {
+        const timeTaken = parseInt(timerSelect.value) - countdown;
+        clearInterval(timer); // Stop the timer
+        endTest(true, timeTaken); // Show score popup with actual time taken
     }
 }
 
@@ -594,6 +628,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Update the startTest function
 function startTest() {
     selectedParagraph = getRandomParagraph();
     backgroundText.innerHTML = selectedParagraph;
@@ -603,14 +638,26 @@ function startTest() {
     inputBox.value = "";
     totalTyped = 0;
     correctTyped = 0;
-    startTime = null;
+    startTime = 0;
+    
+    // Enable input and set focus
     inputBox.disabled = false;
-    inputBox.focus();
+    inputBox.style.cursor = "text";
+    setTimeout(() => {
+        inputBox.focus();
+    }, 100);
+    
     updateBackgroundText();
-
     startButton.disabled = true;
-    isRunning = false; // Make sure typing starts the timer, not button press
+    isRunning = false;
+    if (timer) clearInterval(timer);
 }
+
+// Add this to ensure cursor is always visible
+inputBox.addEventListener('focus', function() {
+    this.style.cursor = 'text';
+});
+
 function calculateAccuracy() {
     let userText = inputBox.value;
     let totalTyped = userText.length;
@@ -666,9 +713,37 @@ function endTest(completed = false, timeTaken = null) {
     startButton.disabled = false;
 }
 
+// Update the inputBox event listener to start timer on first keypress
+inputBox.addEventListener("input", function(e) {
+    if (!isRunning && e.target.value.length === 1) {
+        isRunning = true;
+        startTime = new Date().getTime();
+        startTimer();
+    }
+    updateBackgroundText();
+});
 
 inputBox.addEventListener("input", updateBackgroundText);
 startButton.addEventListener("click", startTest);
+
+document.getElementById('refresh-button').addEventListener('click', function() {
+    // Reset everything
+    clearInterval(timer);
+    isRunning = false;
+    startTime = 0;
+    totalTyped = 0;
+    correctTyped = 0;
+    countdown = parseInt(timerSelect.value);
+    timerDisplay.innerText = `Time: ${countdown}s`;
+    inputBox.value = "";
+    inputBox.disabled = false;
+    startButton.disabled = false;
+    
+    // Get new paragraph
+    selectedParagraph = getRandomParagraph();
+    backgroundText.innerHTML = selectedParagraph;
+    inputBox.focus();
+});
 
 window.onload = () => {
     selectedParagraph = getRandomParagraph();
